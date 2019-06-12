@@ -2,6 +2,7 @@
 #define _LINUX_FTS_TS_H_
 
 #include <linux/device.h>
+#include <linux/pm_qos.h>
 #include <linux/input/sec_cmd.h>
 
 #define FTS_SUPPORT_TOUCH_KEY
@@ -540,6 +541,7 @@ struct fts_ts_info {
 	int fts_power_state;
 	int wakeful_edge_side;
 	unsigned char fts_mode;
+	struct pm_qos_request pm_qos_req;
 
 #ifdef FTS_SUPPORT_TA_MODE
 	bool TA_Pluged;
