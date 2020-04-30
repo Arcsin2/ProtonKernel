@@ -5690,10 +5690,12 @@ static int sched_group_energy(struct energy_env *eenv)
 
 				sg_busy_energy = (group_util * sg->sge->cap_states[cap_idx].power)
 								>> SCHED_CAPACITY_SHIFT;
-				sg_idle_energy = ((SCHED_CAPACITY_SCALE-group_util)
-								* sg->sge->idle_states[idle_idx].power)
-								>> SCHED_CAPACITY_SHIFT;
-
+				sg_idle_energy = ((SCHED_CAPACITY_SCALE-group_util) 
+								* ((sg->sge->cap_states[cap_idx].power 
+										* ((sg->sge->cap_states[cap_idx].power 
+										>> SCHED_CAPACITY_SHIFT)
+										);
+										
 				total_energy += sg_busy_energy + sg_idle_energy;
 
 				if (!sd->child)
